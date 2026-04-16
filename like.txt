@@ -1,0 +1,15 @@
+W programie Microsoft Access operator LIKE działa bardzo podobnie do standardowego SQL-a, ale z jedną istotną różnicą: domyślnie używa innych symboli wieloznacznych (wildcards), ponieważ Access opiera się na standardzie ANSI-89.¬¬
+Oto najważniejsze symbole stosowane w Accessie:
+•	Gwiazdka (*) zamiast %: Zastępuje dowolną liczbę znaków.
+o	LIKE "A*" – znajdzie wszystkie teksty zaczynające się na literę "A".
+•	Znak zapytania (?) zamiast _: Zastępuje dokładnie jeden znak.
+o	LIKE "B?t" – znajdzie słowa "But", "Bit", "Bat".
+•	Hasztag (#): Zastępuje dowolną pojedynczą cyfrę (0-9).
+o	LIKE "Kod-##" – znajdzie "Kod-12", "Kod-99", ale nie "Kod-AX".
+•	Nawiasy kwadratowe [ ]: Pozwalają szukać konkretnych znaków lub zakresów.
+o	LIKE "[A-C]*" – znajdzie rekordy zaczynające się od A, B lub C.
+o	LIKE "[!A]*" – znajdzie rekordy, które nie zaczynają się od litery A (wykrzyknik to zaprzeczenie).
+Gdzie tego użyć w Accessie?
+1.	W widoku Projektu kwerendy: Wpisujesz wzorzec w wierszu „Kryteria” pod konkretną kolumną (np. Jak "K*" – Access sam doda słowo LIKE i cudzysłów).
+2.	W kodzie VBA: Jeśli piszesz makra, używasz operatora Like do porównywania stringów.
+3.	W oknie filtrowania: Możesz wpisać wzorzec bezpośrednio w filtrze tekstowym pola.
