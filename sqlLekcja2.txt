@@ -1,0 +1,59 @@
+przy innym komp daj pliki do:
+C:\xampp\mysql\data
+
+// robienie bazy
+CREATE DATABASE szkola
+	CHARACTER SET utf8mb4
+	COLLATE utf8mb4_polish_ci
+
+// robienie tabeli
+CREATE TABLE uczniowie(
+     id INT PRIMARY KEY AUTO_INCREMENT,
+     imie varchar(50) NOT null,
+     nazwisko varchar(50) NOT NULL,
+     dat_urodzenia DATE,
+     pesel int(11) NOT NULL,
+     adres_email varchar(50),
+     adres varchar(50) NOT NULL,
+     miasto varchar(50)NOT NULL,
+     plec varchar(1) NOT NULL <- jak tu dasz przecinek to ban
+    )
+
+/
+CREATE TABLE test(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    plec ENUM('M', 'K') <-wyznaczone wybory
+    )
+
+// tu cos nie gra nwm
+ALTER TABLE test
+MODIFY plec ENUM('M', 'K') NOT NULL COMMENT 'Dopuszczalne M - mezczyzna, K - kobieta'
+
+/
+INSERT into test (plec)
+VALUES ('L');
+/
+CREATE TABLE test2(
+    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+     imie varchar(50) NOT null,
+     nazwisko varchar(50) NOT NULL,
+     dat_urodzenia DATE,
+     pesel int(11) NOT NULL,
+     adres_email varchar(50),
+     adres varchar(50) NOT NULL,
+     miasto varchar(50)NOT NULL,
+     plec ENUM('M', 'K')
+    )
+// inne zdefiniowanie KEY
+CREATE TABLE adres (
+    id int NOT NULL AUTO_INCREMENT,
+    wojewodztwo varchar(45) NOT NULL,
+    powiat varchar(45) NOT NULL,
+    miejscowosc varchar(45) NOT NULL,
+    ulica varchar(45) NOT NULL,
+    nr_domu varchar(45) NOT NULL,
+    nr_lokalu varchar(45) NOT NULL,
+    PRIMARY KEY(id)   
+    )
+/
+
