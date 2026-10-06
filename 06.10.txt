@@ -1,0 +1,40 @@
+like a% - pierwsza litera to a
+like %a - ostatnia lit to a
+like %a% - zawiera a
+Like _a% - a to druga litera
+
+DELETE FROM _ WHERE
+TRUNCATE TABLE
+DROP DATABASE
+CREATE TABLE nowa_tabela AS
+SELECT * FROM
+CREATE TABLE nowa_tabela
+
+ALTER TABLE nazwa_tabeli ADD nazwa_kolumny definicja_kolumny;
+ALTER TABLE nazwa_tabeli ADD (
+	nazwa_kolumny1 definicja_kolumny, 
+	nazwa_kolumny2 definicja_kolumny
+);
+
+ALTER TABLE nazwa_tabeli ADD nazwa_kolumny definicja_kolumny FIRST; - pojawi sie na poczatku tabeli
+
+ALTER TABLE nazwa_tabeli
+ADD nazwa_nowej_kolumny typ_danych AFTER istniejaca_kolumna;
+
+
+	--MODYFIKACJA KOLUMNY W TABELI
+ALTER TABLE nazwa_tabeli MODIFY plec varchar(10) NOT NULL;
+
+ALTER TABLE uzytkownicy
+CHANGE telefon numer_tel VARCHAR(25);
+
+	--ZMIANIA NAZWY KOLUMNY
+ALTER TABLE nazwa_tab
+RENAME COLUMN stara_nazwa TO nowa_nazwa; - nie zawsze zadziala
+
+ALTER TABLE nazwa_tab
+CHANGE stara_nazwa nowa_nazwa INT;
+
+	--zmienia typ i przesuwa kol 'kod_kraju' na sam poczatek
+ALTER TABLE uzytkownicy
+MODIFY kod_kraju VARCHAT(3) AFTER; (chb ma byc FIRST a nie AFTER ale pan tak napisal to sie n kluce)

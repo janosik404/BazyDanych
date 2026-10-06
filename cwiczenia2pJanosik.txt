@@ -1,0 +1,39 @@
+1) Dodaj do tabeli uczen kolumnę data_ur przechowującą daty
+
+ALTER TABLE uczen
+ADD data_ur DATE;
+
+2) Dodaj do tabeli uczen kolumnę dolaczyl będącą liczbą całkowitą, nie pustą, z domyślną wartością 2019
+
+ALTER TABLE uczen
+ADD dolaczyl INT NOT NULL DEFAULT "2019";
+
+3) Dodaj do tabeli nauczyciel kolumny: przedmiot - ciąg znaków o długości 50 oraz plec - ciąg znaków o długości 1
+
+ALTER TABLE nauczyciel (
+ADD przedmiot VARCHAR(50),
+ADD plec VARCHAR(1)
+);
+
+4) Zmodyfikuj kolumnę plec tabeli nauczyciel zwiększając limit znaków do 10, nie puste
+
+ALTER TABLE nauczyciel
+MODIFY plec VARCHAR(10) NOT NULL;
+
+5) Zmień nazwę kolumny przedmiot tabeli nauczyciel na przedmioty, o typie tekstowym
+Usuń kolumnę plec z tabeli nauczyciel
+
+ALTER TABLE nauczyciel
+CHANGE przedmiot przedmioty VARCHAR(50);
+
+DELETE FROM nauczyciel plec;
+
+6) Zmień nazwę tabeli ocena na osiagniecia
+
+ALTER TABLE ocena
+CHANGE ocena osiagniecia;
+
+7) Ustaw dla bazy danych dziennik kodowanie utf8_polish_ci
+8) Ustaw dla tabeli uczen kodowanie utf8_polish_ci
+9) Przekonwertuj znaki w tabeli uczen na utf8_polish_ci
+
