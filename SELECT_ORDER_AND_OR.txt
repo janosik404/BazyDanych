@@ -1,0 +1,34 @@
+	--SELECT-- 
+	/sluzy do pobierania danych, okresla ktore kolumny maja zostac wyswietlone w wyniku
+	SELECT * pobiera wszystkie kolumny z tabeli/
+
+SELECT kolumna1, kolumna2 FROM nazwa_tabeli;
+
+SELECT * from pasazer;
+
+SELECT kolumna1, kolumna2... FROM nazwa_tabeli WHERE warunki;
+SELECT * FROM pasazer WHERE adres_id = 1;
+
+	--ORDER BY--
+	/sluzy do sortowania wynikow
+		-ASC(domyslne)
+		-DESC/
+
+SELECT * FROM pasazer ORDER BY id DESC;
+
+	KLAUZURA LIMIT - uzywany na koncu zapytania SELECT - limitujemy wyswietlanie rekordow
+SELECT * FROM pasazer ORDER BY id DESC LIMIT 2;
+
+	--AND, OR-- uzyawnie w warunku WHERE
+	/AND && - do laczenia wielu warunkow, wszystkie musza byc spelnione aby wynik sie wyswietlil/
+
+SELECT * FROM pasazer WHERE imie LIKE "J%" AND nazwisko like "K%";
+
+	/OR || - sluzy do laczenia warunkow klauzury WHERE - system zwroci dany wiersz jezeli vhociaz jeden warunek zostal spelniony/
+
+SELECT * FROM pasazer WHERE imie LIKE "J%" OR nazwisko like "K%";
+
+SELECT * FROM produkty
+WHERE dostepne = 1 AND (kategotia = 'elektronika' OR kategoria = 'AGD');
+
+SELECT * FROM pasazer WHERE imie LIKE 'J%' AND (nazwisko like 'K%' OR nazwisko LIKE 'N%');
