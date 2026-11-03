@@ -1,0 +1,56 @@
+SELECT nazwisko FROM nauczyciel WHERE imie LIKE '%a'
+
+SELECT nazwisko FROM nauczyciel WHERE YEAR(data_urodzenia) > 1970; 
+
+
+- wyswietl katekorie ocen o wadzie mniejszej niz 2 lub wiekszej niz 5
+	SELECT nazwa, waga FROM kategorie_ocen WHERE waga < 2 OR waga > 5;
+
+		\\ BETWEEN
+
+	SELECT nazwy_kolumn
+FROM nazwa_tabeli
+WHERE nazwa_kolumn BETWEEN wartosc1 and wartosc2
+
+- cena znajduje sie pomedzy 100 a 300
+	SELECT cena, nazwa FROM produkty WHERE cena BETWEEN 100 AND 300;
+
+		\\ NOT - mozna go laczyc
+	SELECT nazwy_kolumn
+FROM nazwa_tabeli
+WHERE NOT warunki
+
+- producenci z krajow innych niz niemcy
+	SELECT nazwa FROM producent WHERE NOT kraj = 'Niemcy'
+
+co bedzie na kartkowce
+AND, OR, NOT, LIKE, BETWEEN, DESC, ASC, ORDER BY
+
+- wyswuetl z tabeli kategorie ocen nazwy kategor iw ktorych waga od 2 do 4
+	SELECT nazwa FROM kategorie_ocen WHERE waga BETWEEN 2 AND 4;
+
+- imiona i nazwiska nauczycieli ktorzy urodzili sie dokladnie w 1986 roku
+	SELECT imie, nazwisko FROM nauczyciel WHERE YEAR(data_urodzenia) = 1986;
+
+- wyswietl imiona i nazwiska oraz daty urodzenia nauczycieli urodzonych po 1990 roku, wyniki posortuj od najmlodszego do najstarszego
+
+	SELECT imie, nazwisko, data_urodzenia FROM nauczyciel 
+WHERE YEAR(data_urodzenia) > 1990 
+ORDER BY data_urodzenia desc;
+
+- wyswietl nazwy przdmiotow o id ktore n mieszcza sie w przedziale od 5 do 10
+	SELECT nazwa FROM przedmiot WHERE id NOT BETWEEN 5 and 10;
+
+- znajdz nauczycieli ktorzy urodzili sie w latach 1970 - 1979(pelne daty)
+	SELECT imie, nazwisko FROM nauczyciel 
+WHERE data_urodzenia BETWEEN '1970-01-01' AND '1979-12-31' ORDER BY data_urodzenia;
+
+- wyswietl imiona i nazwiska ucznow ktorych imie zaczyna sie na litere a, a nazwisko nie zaczyna sie na litere k
+	SELECT imie, nazwisko FROM uczen WHERE imie LIKE 'a%' AND nazwisko NOT LIKE 'k%';
+
+- wybierz z tabeli ocena wszystkie rekordy w ktorych uczen otrzymal ocene ndst
+	SELECT * FROM ocena WHERE ocena = 1 ORDER by id_przedmiot;
+
+- znajdz w tab nauczyciel osoby ktorych rok urodzenia n miesci sie w przedziale 1950 - 1980
+	SELECT imie, nazwisko FROM nauczyciel 
+WHERE YEAR(data_urodzenia) NOT BETWEEN 1950 AND 1980;
