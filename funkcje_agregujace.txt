@@ -1,0 +1,63 @@
+SELECT nazwisko, imie FROM uczen ORDER BY nazwisko LIMIT 5;
+SELECT nazwisko, imie FROM uczen ORDER BY nazwisko ASC, imie DESC LIMIT 5;
+
+GROUP BY
+
+SELECT kto, SUM(ile_zaplacil) FROM Zakupy GROUP BY Kto;
+SELECT id_klasa, COUNT(*) FROM uczen GROUP BY id_klasa;
+
+SELECT id_klasa, COUNT(*) FROM uczen GROUP BY id_klasa HAVING COUNT(*) > 35;
+SELECT id_klasa AS klasa, COUNT(*) AS ilosc FROM uczen GROUP BY id_klasa HAVING 
+COUNT(*) > 35;
+
+	podstawowe funkcje agregujace
+COUNT() - - zwraca laczna liczbe wierszy
+COUNT(*) - zlicz wszystko, tylko wiersze w ktorych nie m watrosci null
+COUNT(5) - policzy 5 wierszy
+COUNT(kolumna) - a
+	SELECT COUNT(*) AS suma_ocen FROM ocena;
+
+SUM()
+SUM(zsumuj) - ile lacznie musisz zaplacic przy kasie
+	SELECT SUM(ocena) FROM ocena;
+
+AVG() - oblicznie sredniej
+AVG(srednia) - ile srednio kosztowala jedna rzecz
+	SELECT AVG(ocena) FROM ocena WHERE id_przedmiot = 10;
+	SELECT AVG(ocena) as srednia FROM ocena WHERE id_przedmiot = 10;
+
+MIN() - zwraca najmnejsza wartosc ze zbioru
+	SELECT nazwa, MIN(waga) FROM kategorie_ocen;
+
+MAX() - najwieksza wertosc ze zbioru
+	SELECT nazwa, MAX(waga) FROM kategorie_ocen;
+
+DISTINCT - aby policzyc ile jest elementow bez powtorzen
+	SELECT COUNT(DISTINCT ocena) FROM ocena;
+ 
+	DISTINCT + funkcje agregujace
+
+COUNT(produkty) ile sztuk towaru mam w koszyku
+	#wynik: 5
+
+COUNT(DISTINCT produkty) ile roznych rodzajow produktu kupiles
+	#wynik: 3
+
+SELECT DISTINCT produkty, cena FROM zakupy
+
+WAZNA pulapka: puste pola (NULL)
+
+// wypisz liste nauczysieli oraz ilosc wystawionych przez nich ocen bdb
+	SELECT id_nauczyciel, count(ocena) AS ilosc_piatek from ocena WHERE ocena = 5 GROUP BY id_nauczyciel ORDER BY ilosc_piatek DESC;
+
+// wypisz liste ktora bedzie zawierala imie oraz ilosc wystapien tego imiena wsrod uczniow, posortuj alfabetycznie
+
+	SELECT imie, COUNT(*) AS ilosc_wystapien FROM uczen GROUP BY imie ORDER BY ilosc_wystapien DESC;
+
+// lista zawierajaca lata oraz ilosc nauczycieli urodzonych w poszczegolnych latach
+
+	SELECT YEAR(data_urodzenia) AS rok, COUNT(*) FROM nauczyciel GROUP BY rok ORDER BY rok DESC;
+
+// wypisz w poszczegolnych klasach, numer oraz poszczegolne klasy, w raz z iloscia uczniow w tej klasie, posortuj wedlug ilosci uczniow w tej klasie
+
+	SELECT numer, oznaczenie, COUNT(*) AS ilosc_uczniow FROM klasa, uczen WHERE klasa.id = uczen.id GROUP BY id_klasa ORDER BY ilosc_uczniow DESC;
