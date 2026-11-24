@@ -1,0 +1,114 @@
+1. Dodaj nową kolumnę `email` (typ tekstowy do 100 znaków) do tabeli `nauczyciel`.
+
+	ALTER TABLE nauczyciel ADD COLUMN email varchar(100);
+
+2. Dodaj nową kolumnę `data_wystawienia` (typ daty) do tabeli `ocena`.
+
+	ALTER TABLE ocena ADD COLUMN data_wystawienia date;
+
+3. Zmień typ danych kolumny `oznaczenie` w tabeli `klasa` na tekstowy o długości do 10 znaków (wartość wymagana).
+
+	ALTER TABLE klasa CHANGE oznaczenie oznaczenie varchar(10);
+
+4. Zmień nazwę kolumny `waga` na `waga_oceny` w tabeli `kategorie_ocen`.
+
+	ALTER TABLE kategorie_ocen CHANGE waga waga_oceny int;
+
+5. Usuń kolumnę `email` z tabeli `nauczyciel`.
+
+	ALTER TABLE nauczyciel DROP COLUMN email;
+
+6. Wyświetl wszystkie unikalne imiona uczniów posortowane alfabetycznie (rosnąco).
+
+	SELECT DISTINCT imie FROM uczen ORDER BY imie;
+
+7. Wyświetl imiona i nazwiska nauczycieli z aliasami (`Imie_Nauczyciela`, `Nazwisko_Nauczyciela`) oraz ich daty urodzenia, posortowane od najmłodszego nauczyciela.
+
+	SELECT imie AS Imie_Nauczyciela, nazwisko AS Nazwisko_Nauczyciela, data_urodzenia
+FROM nauczyciel
+ORDER BY year(data_urodzenia) DESC;
+
+8. Wyświetl unikalne oznaczenia profili klas w szkole jako `Profil_Klasy`.
+
+	SELECT oznaczenie AS Profil_Klasy FROM klasa;
+
+9. Wyświetl identyfikatory oraz nazwy wszystkich przedmiotów (jako `Nazwa_Przedmiotu`) posortowane malejąco według nazwy.
+
+	SELECT id, nazwa as Nazwa_Przedmiotu FROM przedmiot ORDER BY nazwa DESC;
+
+10. Wyświetl nazwy oraz wagi kategorii ocen, posortowane według wagi od najwyższej, a następnie alfabetycznie po nazwie.
+
+	SELECT nazwa, waga_oceny FROM kategorie_ocen ORDER BY waga_oceny DESC, nazwa ASC;
+
+11. Wyświetl imiona, nazwiska i daty urodzenia nauczycieli urodzonych w latach 80. XX wieku (od 1980-01-01 do 1989-12-31).
+
+	SELECT imie, nazwisko, data_urodzenia FROM nauczyciel WHERE data_urodzenia BETWEEN 1980-01-01 AND 1989-12-31;
+	
+12. Wyświetl nazwy i wagi kategorii ocen, których waga mieści się w przedziale od 3 do 5.
+
+	SELECT nazwa, waga_oceny FROM kategorie_ocen WHERE waga_oceny BETWEEN 3 and 5;
+
+13. Wyświetl imiona, nazwiska oraz identyfikatory klas uczniów uczęszczających do klas o ID 1, 2 lub 14.
+
+	SELECT imie, nazwisko, id_klasa FROM uczen WHERE id_klasa = 1 OR id_klasa = 2 OR id_klasa = 14;
+
+14. Wyświetl identyfikatory ocen, identyfikatory uczniów oraz same oceny dla wszystkich ocen innych niż 1 i 5.
+
+	SELECT id, id_uczen, ocena FROM ocena WHERE ocena NOT IN (1,5);
+
+15. Wyświetl imiona i nazwiska uczniów, których nazwisko zaczyna się na literę „K”.
+
+	SELECT imie, nazwisko from uczen where nazwisko like 'k%';
+
+16. Wyświetl nazwy przedmiotów, które zawierają w sobie słowo „język”.
+
+	SELECT nazwa from przedmiot WHERE nazwa like '%język%';
+
+17. Wyświetl imiona, nazwiska oraz daty urodzenia nauczycielek (imiona kończące się na „a”), które nie urodziły się przed 1970 rokiem.
+
+	SELECT imie, nazwisko, data_urodzenia FROM nauczyciel WHERE imie LIKE '%a' AND YEAR(data_urodzenia) > '1970';
+
+18. Wyświetl numery i oznaczenia klas technikum informatycznego (`TI`) lub mechatronicznego (`TM`) z rocznika 3 lub 4.
+
+	SELECT numer, oznaczenie FROM klasa where (oznaczenie = 'TI' OR oznaczenie = 'TM') AND numer IN (3, 4);
+
+19. Wyświetl imiona i nazwiska uczniów o imieniu „Jan” lub „Paweł”, których nazwisko nie kończy się na „ski”.
+
+	SELECT imie, nazwisko FROM uczen WHERE (imie = 'Jan' OR imie = 'Paweł') AND nazwisko NOT LIKE '%ski';
+
+20. Wyświetl identyfikatory uczniów oraz oceny z przedmiotu o ID 12 (matematyka), które wynoszą 1 lub 2.
+
+	SELECT id_uczen, ocena FROM ocena WHERE id_przedmiot = 12 AND ocena IN(1,2);
+
+21. Oblicz łączną liczbę wszystkich wystawionych ocen w bazie danych (jako `Liczba_Wszystkich_Ocen`).
+
+	SELECT COUNT(ocena) AS Liczba_Wszystkich_Ocen FROM ocena;
+
+22. Oblicz średnią wszystkich ocen w szkole (jako `Srednia_Szkoly`).
+
+	SELECT AVG(ocena) AS Srednia_Szkoly FROM ocena;
+
+23. Znajdź datę urodzenia najstarszego (`Najstarszy`) oraz najmłodszego (`Najmlodszy`) nauczyciela.
+
+	SELECT MAX(data_urodzenia) AS Najstarszy, MIN(data_urodzenia) AS Najmłodszy FROM nauczyciel;
+
+24. Oblicz sumę wag wszystkich kategorii ocen (jako `Suma_Wag`).
+
+	
+
+25. Policz, ile jest unikalnych nazwisk wśród wszystkich uczniów (jako `Unikalne_Nazwiska`).
+26. Wyświetl identyfikatory klas oraz liczbę uczniów w każdej z nich (`Liczba_Uczniow`), sortując malejąco według liczby uczniów.
+27. Oblicz średnią ocen dla każdego przedmiotu (według `id_przedmiot` jako `Srednia_Przedmiotu`), sortując od najwyższej średniej.
+28. Wyświetl identyfikatory nauczycieli oraz liczbę wystawionych przez nich ocen (`Ilosc_Wystawionych_Ocen`) dla tych nauczycieli, którzy wystawili więcej niż 110 ocen.
+29. Wyświetl identyfikatory uczniów oraz ich średnią ocen (`Srednia`) dla uczniów ze średnią wyższą niż 3.8, sortując malejąco.
+30. Policz, ile razy wystawiono każdy stopień oceny (od 1 do 5) jako `Czestotliwosc`, sortując rosnąco według oceny.
+31. Wyświetl identyfikatory przedmiotów oraz liczbę ocen z nich wystawionych (`Liczba_Ocen`) dla przedmiotów, z których wystawiono mniej niż 650 ocen.
+32. Wyświetl identyfikatory kategorii ocen oraz średnią ocen dla każdej kategorii (`Srednia_Kategorii`), uwzględniając tylko te ze średnią poniżej 2.95.
+33. Wyświetl imiona i nazwiska uczniów uczęszczających do klasy `1 TI`.
+34. Wyświetl wszystkie oceny oraz identyfikatory przedmiotów dla ucznia o imieniu „Paweł” i nazwisku „Kotuła”.
+35. Wyświetl imiona i nazwiska nauczycieli, którzy wystawili przynajmniej jedną ocenę 5 ze sprawdzianu.
+36. Wyświetl imiona i nazwiska uczniów, którzy nie otrzymali ani jednej oceny niedostatecznej (1).
+37. Oblicz średnią ocen z przedmiotu „matematyka” (jako `Srednia_Matematyka`).
+38. Policz łączną liczbę ocen wystawionych przez nauczycieli o nazwisku „Kołtun” (jako `Oceny_Koltunow`).
+39. Wyświetl nazwy przedmiotów, z których uczniowie klasy `4 TE` otrzymali ocenę 5.
+40. Wyświetl imiona i nazwiska uczniów, nazwy przedmiotów (`Przedmiot`) oraz oceny dla wszystkich ocen równych 5 uzyskanych z kategorii „Egzamin”, sortując alfabetycznie według nazwiska ucznia.
